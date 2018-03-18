@@ -10,9 +10,32 @@
         android:id="@+id/buttonCreatePerson"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:text="CREATE PERSON"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
- />
+        android:text="CREATE PERSON" />
+
+    <TextView
+        android:id="@+id/textViewRecordCount"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/buttonCreatePerson"
+        android:gravity="center"
+        android:padding="2dp"
+        android:text="0 records found" />
+
+    <ScrollView
+        android:id="@+id/scrollViewRecords"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewRecordCount">
+
+        <LinearLayout
+            android:id="@+id/linearLayoutRecords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>
