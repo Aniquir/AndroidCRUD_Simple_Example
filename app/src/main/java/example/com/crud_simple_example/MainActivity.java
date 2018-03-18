@@ -50,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 textViewPersonsItem.setPadding(0,10,0,10);
                 textViewPersonsItem.setText(textViewContents);
                 textViewPersonsItem.setTag(Integer.toString(id));
+                textViewPersonsItem.setOnLongClickListener(new OnLongClickListenerPersonRecord());
 
                 linearLayoutRecords.addView(textViewPersonsItem);
             }

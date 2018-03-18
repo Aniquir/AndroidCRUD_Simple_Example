@@ -73,4 +73,62 @@ public class TableControllerPerson extends DatabaseHandler{
 
         return recordsList;
     }
+
+    public ObjectPerson readSingleRecord(int personId) {
+
+        ObjectPerson objectPerson = null;
+
+        String sql = "SELECT * FROM persons WHERE id = " + personId;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery(sql, null);
+
+        if (cursor.moveToFirst()){
+
+            int id = Integer.parseInt(cursor.getString(cursor.getColumnIndex("id")));
+            String firstName = cursor.getString(cursor.getColumnIndex("firstname"));
+            String email = cursor.getString(cursor.getColumnIndex("email"));
+
+            objectPerson = new ObjectPerson();
+            objectPerson.id = id;
+            objectPerson.firstName = firstName;
+            objectPerson.email = email;
+        }
+
+        cursor.close();
+        db.close();
+
+        return objectPerson;
+    }
+
+    public boolean update(ObjectPerson objectPerson) {
+
+        ContentValues values = new ContentValues();
+
+        values.put("firstname", objectPerson.firstName);
+        values.put("email", objectPerson.email);
+
+        String where = "id = ?";
+
+        String[] whereArgs = { Integer.toString(objectPerson.id) };
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        boolean updateSuccessful = db.update("persons", values, where, whereArgs) > 0;
+        db.close();
+
+        return updateSuccessful;
+    }
+
+    public boolean delete(int id) {
+
+        boolean deleteSuccessful = false;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        deleteSuccessful = db.delete("persons", "id ='" + id + "'", null) > 0;
+        db.close();
+
+        return deleteSuccessful;
+    }
 }
